@@ -1,7 +1,10 @@
 # RecruitBase
 
 A Django template app for managing recruitment platform.
-Work in progress - More description to come
+
+**Work in progress - More description to come**
+
+This project is mainly inspired from [this tutorial](https://www.youtube.com/watch?v=xv_bwpA_aEA&list=PL-51WBLyFTg2vW-_6XBoUpE7vpmoR3ztO) from https://github.com/divanov11
 
 
 ## How to use it

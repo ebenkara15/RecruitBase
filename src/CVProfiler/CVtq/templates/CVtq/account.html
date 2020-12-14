@@ -1,0 +1,76 @@
+{% extends 'CVtq/basesite.html' %}
+
+{% block content %}
+
+
+<div class="container mt-5 bg-light rounded">
+    <h3 class="pt-3 font-weight-light">Account view of {{ profile.user.username }}</h3>
+    <hr>
+    <div class="container mt-2 mb-4 p-4">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label class="font-weight-bold" for="inputFName">Prénom</label>
+                <div id="inputFName">{{ profile.first_name }}</div>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label class="font-weight-bold" for="inputLName">Nom</label>
+                <div id="inputLName">{{ profile.last_name }}</div>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label class="font-weight-bold" for="inputEmail">E-mail</label>
+                <div id="inputEmail">{{ profile.user.email }}</div>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label class="font-weight-bold" for="inputBirth">Date de naissance</label>
+                <div id="inputBirth">{{ profile.date_of_birth }}</div>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label class="font-weight-bold" for="inputJobDomain">Domaine métier</label>
+                <div id="inputJobDomain">{{ profile.profile_domain }}</div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="font-weight-bold" for="inputCV">CV</label>
+                <div id="inputCV">{{ profile.cv_file.name }}</div>
+                <a href="{% url 'CVtq:cv' pk=user.id profile_id=profile.id %}">Consulter</a>
+            </div>
+
+            <div class="form-group col-md-3" style="width: fit-content;">
+                <label class="font-weight-bold" for="checkAvail">Disponible</label>
+                <div id="checkAvail">
+                {% if profile.is_available %}
+                Oui
+                {% else %}
+                Non
+                {% endif %}
+            </div>
+        </div>
+
+        </div>
+
+        
+
+        <div class="form-group">
+            <label for="inputPerso" class="font-weight-bold">Un peu plus sur vous... (optionnel)</label>
+            <div id="checkAvail" class="border boder-light p-3 bg-light font-weight-light">
+                {{ profile.profile_text}}
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <div class="input-group-append">
+                <a class="btn btn-warning" role="button" href="{% url 'CVtq:account_edit' %}">Modifier <i class="fas fa-pen"></i></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

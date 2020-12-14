@@ -1,0 +1,18 @@
+{% extends 'CVtq/basesite.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'CVtq/offers_st.css' %}">
+{% if firms_list %}
+<ul>
+{% for firm in firms_list %}
+<li><a href="#">{{ firm.firm_name }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+    <p>No firms are available.</p>
+{% endif %}
+
+{% endblock %}

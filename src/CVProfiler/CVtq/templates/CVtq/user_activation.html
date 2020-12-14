@@ -1,0 +1,9 @@
+{% autoescape off %}
+{% csrf_token %}
+Bonjour {{ user.username }},
+Cliquez sur le lien pour confirmer la création de votre compte,
+http://{{ domain }}{% url 'CVtq:activate' uidb64=uid token=token %}
+
+A bientôt,
+Le Club Afrique.
+{% endautoescape %}

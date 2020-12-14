@@ -1,0 +1,35 @@
+{% extends 'CVtq/basesite.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'CVtq/offers_st.css' %}">
+{% if profiles_list %}
+
+<div class="container bg-warning text-dark mb-2 p-2">
+    <h3>Filter profiles</h3>
+
+    <div class="container-fluid">
+        <form action="" method="POST">Some filed in which you can affinate your research</form>
+    </div>
+    
+</div>
+
+{% for profile in profiles_list %}
+
+<div class="container mb-2 mt-2 p-3 bg-light d-flex">
+    <div class="p-2 align-self-center">{{ profile.first_name }} {{ profile.last_name }}</div>
+    <div class="p-2 align-self-center ml-auto">
+        <a class="btn btn-info ml-3" role="button" href="{% url 'CVtq:account' pk=user.id%}">Voir le profil <i class="far fa-file-pdf ml-2"></i></a>
+    </div>
+</div>
+
+
+{% endfor %}
+
+{% else %}
+    <p>No profiles are available.</p>
+{% endif %}
+
+{% endblock %}

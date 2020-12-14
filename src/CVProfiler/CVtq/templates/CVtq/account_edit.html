@@ -1,0 +1,108 @@
+{% extends 'CVtq/basesite.html' %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+    <h3 class="mb-5">Edit personal info of {{ profile }}</h3>
+    <form enctype="multipart/form-data"method="POST">
+        {% csrf_token %}
+        <div class="p-4 mb-4 bg-light">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="inputFName">Prénom</label>
+                    {% if not profile.first_name %}
+                    <input type="text" name="first_name" class="form-control" id="inputFName" placeholder="Prénom">
+                    {% else %}
+                    <input type="text" name="first_name" class="form-control" id="inputFName" value="{{ profile.first_name }}">
+                    {% endif %}
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="inputLName">Nom</label>
+                    {% if not profile.last_name %}
+                    <input type="text" name="last_name" class="form-control" id="inputLName" placeholder="Nom">
+                    {% else %}
+                    <input type="text" name="last_name" class="form-control" id="inputLName" value="{{ profile.last_name }}">
+                    {% endif %}
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="inputEmail">E-mail</label>
+                    <input type="email" class="form-control-plaintext" id="inputEmail" value="{{ profile.user.email }}" readonly>
+                
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="inputBirth">Date de naissance</label>
+                    {% if not profile.date_of_birth %}
+                    <input type="date" name="date_of_birth" class="form-control" id="inputBirth">
+                    {% else %}
+                    <input type="date" name="date_of_birth" class="form-control" id="inputBirth" value="{{ profile.date_of_birth | date:'Y-m-d' }}">
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputJobDomain">Domaine métier</label>
+                    <select id="inputState" name="profile_domain" class="form-control">
+                    {% if profile.profile_domain %}
+                    <option selected>{{ profile.profile_domain }}</option>
+                    {% else %}
+                    <option selected>...</option>
+                    {% endif %}
+                    <option>IT</option>
+                    <option>Finance</option>
+                    <option>Production</option>
+                    <option>Supply Chain</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="inputCV">Votre CV</label>
+                    <input type="file" name="cv_file" class="form-control-file" id="inputCV">
+                </div>
+
+            </div>
+
+            <div class="form-group" style="width: fit-content;">
+                <label class="form-check-label" for="checkAvail">Disponible</label>
+                <select name="is_available" class="form-control" id="checkAvail">
+                
+                {% if profile.is_available %}
+                <option selected value="true">Oui</option>
+                <option value="false">Non</option>
+
+                {% else%}
+                <option value="true">Oui</option>
+                <option value="false" selected>Non</option>
+
+                {% endif %}
+                </select>
+                
+            </div>
+
+            <div class="form-group">
+                <label for="inputPerso">Un peu plus sur vous... (optionnel)</label>
+                {% if profile.profile_text %}
+                <textarea name="profile_text" class="form-control" id="inputPerso" rows="3" >{{ profile.profile_text }}</textarea>
+                {% else %}
+                <textarea name="profile_text" class="form-control" id="inputPerso" rows="3" placeholder=""></textarea>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="d-flex ml-3">
+            <div class="input-group-append mr-3">
+                <button type="submit" class="btn btn-success">Sauvegarder <i class="fas fa-check"></i></button>
+            </div>
+            <div class="input-group-append">
+                <a class="btn btn-danger" role="button" href="{% url 'CVtq:account' user.id %}">Annuler <i class="fas fa-times"></i></a>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
